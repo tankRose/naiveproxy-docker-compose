@@ -29,7 +29,7 @@ route {
   #     root /var/www/html 
   #}
 
-  reverse_proxy {$FALLBACK_HOST} {
+  reverse_proxy https://{$FALLBACK_HOST} {
     header_up Host {$FALLBACK_HOST}
     transport http {
       tls
