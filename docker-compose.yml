@@ -4,9 +4,9 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        CADDY_VERSION: "2.11.4"
-        FORWARDPROXY_VERSION: "naive"
-    image: local/naive-caddy:v2.11.4-forwardproxy-v2.11.2-naive
+        CADDY_VERSION: "${CADDY_VERSION}"
+        FORWARDPROXY_VERSION: "${FORWARDPROXY_VERSION}"
+    image: local/naive-caddy:${CADDY_VERSION}-forwardproxy-${FORWARDPROXY_VERSION}
     container_name: naive-caddy
     restart: unless-stopped
 
@@ -25,8 +25,9 @@ services:
       - ./config:/config
 
     environment:
-      - TZ=Asia/Shanghai
-      - PROXY_DOMAIN=yourproxydomain.com
-      - FALLBACK_HOST=yourfallbackhost.com
-      - AUTH_USERNAME=yourusername
-      - AUTH_PASSWORD=yourpassword
+      - TZ=${TZ}
+      - TLS_EMAIL=${TLS_EMAIL}
+      - PROXY_DOMAIN=${DOMAIN_1}
+      - FALLBACK_HOST=${FALLBACK_HOST}
+      - AUTH_USERNAME=${PROXY_USER}
+      - AUTH_PASSWORD=${PROXY_PASS}

@@ -16,7 +16,7 @@
 
 
 :443, {$PROXY_DOMAIN}  #Modify to your domain
-tls formalinmoniraj@gmail.com  #Modify to your email address
+tls {$TLS_EMAIL} #Modify to your email address
 route {
   forward_proxy {
       basic_auth {$AUTH_USERNAME} {$AUTH_PASSWORD}  #Modify to your user name and password
