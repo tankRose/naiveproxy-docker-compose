@@ -1,12 +1,13 @@
 # syntax=docker/dockerfile:1
 
-ARG CADDY_VERSION=2.11.4
-ARG FORWARDPROXY_VERSION=naive
+ARG CADDY_VERSION=${CADDY_VERSION}
+ARG FORWARDPROXY_VERSION=${FORWARDPROXY_VERSION}
 
 FROM caddy:${CADDY_VERSION}-builder AS builder
 
 
-RUN --mount=type=cache,target=/go/pkg/mod \
+RUN echo "FORWARDPROXY_VERSION=${FORWARDPROXY_VERSION}" && \
+    --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
     xcaddy build \
     --with github.com/caddyserver/forwardproxy=github.com/klzgrad/forwardproxy@${FORWARDPROXY_VERSION}
