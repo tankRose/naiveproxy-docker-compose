@@ -1,0 +1,32 @@
+services:
+  naive-caddy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CADDY_VERSION: "2.11.4"
+        FORWARDPROXY_VERSION: "naive"
+    image: local/naive-caddy:v2.11.4-forwardproxy-v2.11.2-naive
+    container_name: naive-caddy
+    restart: unless-stopped
+
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./data:/data
+      - ./config:/config
+
+    environment:
+      - TZ=Asia/Shanghai
+      - PROXY_DOMAIN=yourproxydomain.com
+      - FALLBACK_HOST=yourfallbackhost.com
+      - AUTH_USERNAME=yourusername
+      - AUTH_PASSWORD=yourpassword

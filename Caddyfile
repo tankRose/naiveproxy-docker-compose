@@ -1,0 +1,40 @@
+{
+  admin off
+  log {
+    output file /data/logs/caddy/caddy.log {
+        roll_size 10MiB
+        roll_keep 5
+        roll_keep_for 720h
+    }
+    level INFO
+    exclude http.log.error
+  }
+  servers :443 {
+      protocols h1 h2 h3
+  }
+}
+
+
+:443, {$PROXY_DOMAIN}  #Modify to your domain
+tls formalinmoniraj@gmail.com  #Modify to your email address
+route {
+  forward_proxy {
+      basic_auth {$AUTH_USERNAME} {$AUTH_PASSWORD}  #Modify to your user name and password
+      hide_ip
+      hide_via
+      probe_resistance #Modify to a secret domain, like password
+  }
+
+  #file_server { 
+  #     root /var/www/html 
+  #}
+
+  reverse_proxy {$FALLBACK_HOST} {
+    header_up Host {$FALLBACK_HOST}
+    transport http {
+      tls
+      tls_server_name {$FALLBACK_HOST}
+    }
+  }
+
+}
