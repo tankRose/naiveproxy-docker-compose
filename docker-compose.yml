@@ -1,12 +1,6 @@
 services:
   naive-caddy:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        CADDY_VERSION: "${CADDY_VERSION}"
-        FORWARDPROXY_VERSION: "${FORWARDPROXY_VERSION}"
-    image: local/naive-caddy:${CADDY_VERSION}-forwardproxy-${FORWARDPROXY_VERSION}
+    image: tankrose/naive-caddy:${CADDY_VERSION}-forwardproxy-${FORWARDPROXY_VERSION}
     container_name: naive-caddy
     restart: unless-stopped
 
