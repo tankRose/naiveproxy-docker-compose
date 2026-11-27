@@ -16,7 +16,6 @@ services:
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ./data:/data
-      - ./config:/config
 
     environment:
       - TZ=${TZ}
