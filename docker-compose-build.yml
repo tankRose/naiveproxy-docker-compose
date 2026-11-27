@@ -7,29 +7,11 @@ services:
         - linux/amd64
       args:
         CADDY_VERSION: "${CADDY_VERSION}"
-        FORWARDPROXY_VERSION: "${FORWARDPROXY_VERSION}"
-    image: tankrose/naive-caddy:${CADDY_VERSION}-forwardproxy-${FORWARDPROXY_VERSION}
-    container_name: naive-caddy
-    restart: unless-stopped
+        FORWARDPROXY_RELEASE: "${FORWARDPROXY_RELEASE}"
+    image: tankrose/naive-caddy:${CADDY_VERSION}-forwardproxy-${FORWARDPROXY_RELEASE}
 
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "3"
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
+    
+   
 
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./data:/data
-      - ./config:/config
 
-    environment:
-      - TZ=${TZ}
-      - TLS_EMAIL=${TLS_EMAIL}
-      - PROXY_DOMAIN=${DOMAIN_1}
-      - FALLBACK_HOST=${FALLBACK_HOST}
-      - AUTH_USERNAME=${PROXY_USER}
-      - AUTH_PASSWORD=${PROXY_PASS}
+   

@@ -1,10 +1,10 @@
 # syntax=docker/dockerfile:1
 
-ARG CADDY_VERSION=${CADDY_VERSION}
-ARG FORWARDPROXY_VERSION=${FORWARDPROXY_VERSION}
+ARG CADDY_VERSION
 
 FROM caddy:${CADDY_VERSION}-builder AS builder
-ARG FORWARDPROXY_VERSION=${FORWARDPROXY_VERSION}
+
+ARG FORWARDPROXY_VERSION=naive
 
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \

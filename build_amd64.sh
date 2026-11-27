@@ -6,4 +6,4 @@ docker buildx bake \
   -f docker-compose-build.yml \
   --no-cache \
   --load \
-  reality
+  naive-caddy

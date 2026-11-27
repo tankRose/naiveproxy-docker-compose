@@ -1,6 +1,6 @@
 services:
   naive-caddy:
-    image: tankrose/naive-caddy:${CADDY_VERSION}-forwardproxy-${FORWARDPROXY_VERSION}
+    image: tankrose/naive-caddy:${CADDY_VERSION}-forwardproxy-${FORWARDPROXY_RELEASE}
     container_name: naive-caddy
     restart: unless-stopped
 
